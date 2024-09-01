@@ -1,0 +1,138 @@
+openapi: 3.0.0
+info:
+  title: Pricing Service API
+  description: API for managing product prices based on brand, product, and application date.
+  version: 1.0.0
+  contact:
+    name: API Support
+
+servers:
+  - url: http://localhost:8080
+    description: Local development server
+
+paths:
+  /api/prices:
+    get:
+      summary: Retrieves all prices by date.
+      description: Retrieve all prices stored in the system.
+      responses:
+        '200':
+          description: List of all prices.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductPriceDto'
+        '400':
+          $ref: './exceptions.yml#/components/responses/ParametersError'
+        '404':
+          $ref: './exceptions.yml#/components/responses/NotFoundError'
+
+  /api/prices_brand-product:
+    get:
+      summary: Retrieves price by brand or product.
+      description: Retrieve the price based on the brand ID or product ID.
+      parameters:
+        - name: brandId
+          in: query
+          required: true
+          schema:
+            type: integer
+          description: The ID of the brand.
+        - name: productId
+          in: query
+          required: true
+          schema:
+            type: integer
+          description: The ID of the product.
+      responses:
+        '200':
+          description: Price information based on brand or product.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductPriceDto'
+        '400':
+          $ref: './exceptions.yml#/components/responses/ParametersError'
+        '404':
+          $ref: './exceptions.yml#/components/responses/NotFoundError'
+
+  /api/prices_date:
+    get:
+      summary: Retrieves the price by date.
+      description: Retrieve the price based on the brand ID, product ID, and application date.
+      parameters:
+        - name: brandId
+          in: query
+          required: true
+          schema:
+            type: integer
+          description: The ID of the brand.
+        - name: productId
+          in: query
+          required: true
+          schema:
+            type: integer
+          description: The ID of the product.
+        - name: applicationDate
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date-time
+            example: '2020-06-14T10:00:00'
+          description: The date and time of application in ISO format.
+      responses:
+        '200':
+          description: Price information for the given date.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductPriceDto'
+        '400':
+         $ref: './exceptions.yml#/components/responses/ParametersError'
+        '404':
+         $ref: './exceptions.yml#/components/responses/NotFoundError'
+components:
+  schemas:
+    ProductPriceDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: ID of the price entry
+          example: 1
+        brandId:
+          type: integer
+          description: ID of the brand
+          example: 1
+        productId:
+          type: integer
+          description: ID of the product
+          example: 35455
+        priceList:
+          type: integer
+          description: ID of the price list
+          example: 1
+        startDate:
+          type: string
+          format: date-time
+          description: Start date of the price application
+          example: '2020-06-14T00:00:00'
+        endDate:
+          type: string
+          format: date-time
+          description: End date of the price application
+          example: '2020-12-31T23:59:59'
+        priority:
+          type: integer
+          description: Priority of the price
+          example: 1
+        price:
+          type: number
+          format: double
+          description: The applied price
+          example: 35.50
+        currency:
+          type: string
+          description: The currency code (ISO 4217)
+          example: EUR

@@ -1,0 +1,33 @@
+components:
+  schemas:
+    ErrorResponse:
+      description: Representation of an error response.
+      type: object
+      properties:
+        className:
+          type: string
+          description: The canonical name of the exception class.
+        status:
+          type: integer
+          description: HTTP status code.
+        message:
+          type: string
+          description: Detailed message about the error.
+      example:
+        className: com.bcnc.productprices.exceptions.PriceNotFoundException
+        status: 404
+        message: "Price not found for the given criteria."
+
+  responses:
+    ParametersError:
+      description: The request contained invalid parameters.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFoundError:
+      description: The requested resource could not be found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
