@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public interface PruductPriceRepository extends JpaRepository<ProductPrice, Long> {
+public interface ProductPriceRepository extends JpaRepository<ProductPrice, Long> {
 
     @Query("SELECT p FROM ProductPrice p ORDER BY p.id.brandId, p.id.productId, p.id.priceList, p.id.priority DESC")
     List<ProductPrice> findAllPrices();
