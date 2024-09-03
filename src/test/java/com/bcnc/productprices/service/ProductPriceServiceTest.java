@@ -1,15 +1,18 @@
 package com.bcnc.productprices.service;
 
-import com.bcnc.productprices.domain.model.ProductPrice;
-import com.bcnc.productprices.domain.model.ProductPriceId;
+import com.bcnc.productprices.domain.entity.Brands;
+import com.bcnc.productprices.domain.entity.ProductPrice;
+import com.bcnc.productprices.domain.entity.Products;
 import com.bcnc.productprices.domain.repository.ProductPriceRepository;
 import com.bcnc.productprices.domain.service.ProductPriceService;
 import com.bcnc.productprices.infrastructure.rest.exception.PriceNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -21,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-@SpringBootTest
+@ExtendWith(SpringExtension.class)
 class ProductPriceServiceTest {
 
     @MockBean
@@ -32,6 +35,7 @@ class ProductPriceServiceTest {
 
     @BeforeEach
     void setUp() {
+        MockitoAnnotations.openMocks(this);
         productPriceService = new ProductPriceService(productPriceRepository);
     }
 
@@ -90,18 +94,25 @@ class ProductPriceServiceTest {
     void getPriceByDateThrowsPriceNotFoundExceptionWhenNoPrices() {
         when(productPriceRepository.findPriceByDate(any(), any(), any())).thenReturn(Collections.emptyList());
 
-        LocalDateTime localDate = LocalDateTime.now(); //Sonar issue
+        LocalDateTime localDate = LocalDateTime.now();
         assertThrows(PriceNotFoundException.class, () -> productPriceService.getPriceByDate(1L, 1L, localDate));
     }
 
     private static ProductPrice getDataExample(Long brandId, Long productId, LocalDateTime applicationDate) {
-        ProductPriceId ppId = new ProductPriceId();
-        ppId.setBrandId(brandId);
-        ppId.setProductId(productId);
-        ppId.setPriceList(1);
-        ppId.setPriority(1);
+        Products p = new Products();
+        p.setId(productId);
+        p.setName("Product 1");
+        p.setDescription("Description product 1");
+
+        Brands b = new Brands();
+        b.setId(brandId);
+        b.setName("Brand 1");
+
         ProductPrice pp = new ProductPrice();
-        pp.setId(ppId);
+        pp.setProductId(p);
+        pp.setBrandId(b);
+        pp.setPriceList(1);
+        pp.setPriority(1);
         pp.setPrice(BigDecimal.valueOf(55.0));
         pp.setStartDate(applicationDate.minusDays(1));
         pp.setEndDate(applicationDate.plusDays(1));

@@ -1,14 +1,13 @@
 package com.bcnc.productprices.domain.service;
 
-import com.bcnc.productprices.contants.Constants;
-import com.bcnc.productprices.domain.model.ProductPrice;
+import com.bcnc.productprices.domain.entity.ProductPrice;
 import com.bcnc.productprices.domain.repository.ProductPriceRepository;
 import com.bcnc.productprices.infrastructure.rest.exception.PriceNotFoundException;
+import com.bcnc.productprices.utils.Constants;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
-
 
 @Service
 public class ProductPriceService {

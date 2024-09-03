@@ -1,22 +1,38 @@
 package com.bcnc.productprices.web;
 
 import io.restassured.RestAssured;
+import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
 import static org.hamcrest.Matchers.equalTo;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class ProductPriceComponentTest {
 
+    @Autowired
+    private WebApplicationContext context;
+
+    @LocalServerPort
+    private int port;
+
     @BeforeEach
     void setUp() {
-        RestAssured.baseURI = "http://localhost:8080/api";
-        MockitoAnnotations.openMocks(this);
+        MockMvc mockMvc = MockMvcBuilders
+                .webAppContextSetup(context)
+                .build();
+
+        RestAssuredMockMvc.mockMvc(mockMvc);
+        RestAssured.baseURI = "http://localhost";
+        RestAssured.port = port;
     }
 
     @Test
@@ -24,7 +40,7 @@ class ProductPriceComponentTest {
 
         RestAssured.given()
         .when()
-            .get("/prices")
+            .get("/api/prices")
         .then()
             .statusCode(HttpStatus.OK.value())
             .contentType(MediaType.APPLICATION_JSON_VALUE)
@@ -38,7 +54,7 @@ class ProductPriceComponentTest {
             .param("brandId", 1)
             .param("productId", 35455)
         .when()
-            .get("/prices_brand-product")
+            .get("/api/prices_brand-product")
         .then()
             .statusCode(HttpStatus.OK.value())
             .contentType(MediaType.APPLICATION_JSON_VALUE)
@@ -52,7 +68,7 @@ class ProductPriceComponentTest {
         RestAssured.given()
             .param("brandId", 1)
         .when()
-            .get("/prices_brand-product")
+            .get("/api/prices_brand-product")
         .then()
             .statusCode(HttpStatus.BAD_REQUEST.value());
     }
@@ -65,7 +81,7 @@ class ProductPriceComponentTest {
             .param("productId", 35455)
             .param("applicationDate", "2020-06-14T10:00:00")
         .when()
-            .get("/prices_date")
+            .get("/api/prices_date")
         .then()
             .statusCode(HttpStatus.OK.value())
             .contentType(MediaType.APPLICATION_JSON_VALUE);
@@ -79,7 +95,7 @@ class ProductPriceComponentTest {
             .param("productId", 35455)
             .param("applicationDate", "2020-06-14T16:00:00")
         .when()
-            .get("/prices_date")
+            .get("/api/prices_date")
         .then()
             .statusCode(HttpStatus.OK.value())
             .contentType(MediaType.APPLICATION_JSON_VALUE);
@@ -94,7 +110,7 @@ class ProductPriceComponentTest {
             .param("productId", 35455)
             .param("applicationDate", "2020-06-14T21:00:00")
         .when()
-            .get("/prices_date")
+            .get("/api/prices_date")
         .then()
             .statusCode(HttpStatus.OK.value())
             .contentType(MediaType.APPLICATION_JSON_VALUE);
@@ -109,7 +125,7 @@ class ProductPriceComponentTest {
             .param("productId", 35455)
             .param("applicationDate", "2020-06-15T10:00:00")
         .when()
-            .get("/prices_date")
+            .get("/api/prices_date")
         .then()
             .statusCode(HttpStatus.OK.value())
             .contentType(MediaType.APPLICATION_JSON_VALUE);
@@ -124,7 +140,7 @@ class ProductPriceComponentTest {
             .param("productId", 35455)
             .param("applicationDate", "2020-06-16T21:00:00")
         .when()
-            .get("/prices_date")
+            .get("/api/prices_date")
         .then()
             .statusCode(HttpStatus.OK.value())
             .contentType(MediaType.APPLICATION_JSON_VALUE);
@@ -138,7 +154,7 @@ class ProductPriceComponentTest {
             .param("brandId", 1)
             .param("productId", 35455)
         .when()
-            .get("/prices_date")
+            .get("/api/prices_date")
         .then()
             .statusCode(HttpStatus.BAD_REQUEST.value());
     }
