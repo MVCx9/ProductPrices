@@ -1,4 +1,4 @@
-package com.bcnc.productprices.contants;
+package com.bcnc.productprices.utils;
 
 public class Constants {
 

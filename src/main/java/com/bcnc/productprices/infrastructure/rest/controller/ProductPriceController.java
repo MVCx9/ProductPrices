@@ -1,7 +1,7 @@
 package com.bcnc.productprices.infrastructure.rest.controller;
 
 import com.bcnc.productprices.api.ProductPriceApi;
-import com.bcnc.productprices.domain.model.ProductPrice;
+import com.bcnc.productprices.domain.entity.ProductPrice;
 import com.bcnc.productprices.domain.service.ProductPriceService;
 import com.bcnc.productprices.infrastructure.rest.dto.ProductPriceDto;
 import com.bcnc.productprices.utils.ParametersValidator;

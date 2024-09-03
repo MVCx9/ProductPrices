@@ -1,6 +1,6 @@
 package com.bcnc.productprices.infrastructure.rest.dto;
 
-import com.bcnc.productprices.domain.model.ProductPrice;
+import com.bcnc.productprices.domain.entity.ProductPrice;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -18,15 +18,15 @@ public class ProductPriceDto {
     private BigDecimal price;
     private String currency;
 
-    public ProductPriceDto(ProductPrice price) {
-        this.productId = price.getId().getProductId();
-        this.brandId = price.getId().getBrandId();
-        this.priceList = price.getId().getPriceList();
-        this.priority = price.getId().getPriority();
-        this.startDate = price.getStartDate();
-        this.endDate = price.getEndDate();
-        this.price = price.getPrice();
-        this.currency = price.getCurrency();
+    public ProductPriceDto(ProductPrice pp) {
+        this.productId = pp.getProductId().getId();
+        this.brandId = pp.getBrandId().getId();
+        this.priceList = pp.getPriceList();
+        this.priority = pp.getPriority();
+        this.startDate = pp.getStartDate();
+        this.endDate = pp.getEndDate();
+        this.price = pp.getPrice();
+        this.currency = pp.getCurrency();
     }
 
 }

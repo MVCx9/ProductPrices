@@ -1,26 +1,25 @@
 package com.bcnc.productprices.domain.service;
 
-import com.bcnc.productprices.contants.Constants;
-import com.bcnc.productprices.domain.model.ProductPrice;
-import com.bcnc.productprices.domain.repository.PruductPriceRepository;
+import com.bcnc.productprices.domain.entity.ProductPrice;
+import com.bcnc.productprices.domain.repository.ProductPriceRepository;
 import com.bcnc.productprices.infrastructure.rest.exception.PriceNotFoundException;
+import com.bcnc.productprices.utils.Constants;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-
 @Service
 public class ProductPriceService {
 
-    private final PruductPriceRepository pruductPriceRepository;
+    private final ProductPriceRepository productPriceRepository;
 
-    public ProductPriceService(PruductPriceRepository pruductPriceRepository) {
-        this.pruductPriceRepository = pruductPriceRepository;
+    public ProductPriceService(ProductPriceRepository productPriceRepository) {
+        this.productPriceRepository = productPriceRepository;
     }
 
     public List<ProductPrice> getAllPrices() {
-        List<ProductPrice> prices = pruductPriceRepository.findAllPrices();
+        List<ProductPrice> prices = productPriceRepository.findAllPrices();
 
         if (prices.isEmpty()) {
             throw new PriceNotFoundException(Constants.NOT_FOUND_MESSAGE);
@@ -31,7 +30,7 @@ public class ProductPriceService {
 
     public List<ProductPrice> getPriceByBrandAndProduct(Long brandId, Long productId) {
 
-        List<ProductPrice> prices = pruductPriceRepository.findByBrandAndProduct(brandId, productId);
+        List<ProductPrice> prices = productPriceRepository.findByBrandAndProduct(brandId, productId);
 
         if (prices.isEmpty()) {
             throw new PriceNotFoundException(Constants.NOT_FOUND_MESSAGE);
@@ -42,7 +41,7 @@ public class ProductPriceService {
 
     public List<ProductPrice> getPriceByDate(Long brandId, Long productId, LocalDateTime applicationDate) {
 
-        List<ProductPrice> prices = pruductPriceRepository.findPriceByDate(brandId, productId, applicationDate);
+        List<ProductPrice> prices = productPriceRepository.findPriceByDate(brandId, productId, applicationDate);
 
         if (prices.isEmpty()) {
             throw new PriceNotFoundException(Constants.NOT_FOUND_MESSAGE);
