@@ -1,6 +1,6 @@
-package com.bcnc.productprices.api;
+package com.bcnc.productprices.application.port.input;
 
-import com.bcnc.productprices.infrastructure.rest.dto.ProductPriceDto;
+import com.bcnc.productprices.infrastructure.api.dto.ProductPriceDto;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Validated
-public interface ProductPriceApi {
+public interface GetProductPrice {
 
     /**
      * Retrieves all prices.

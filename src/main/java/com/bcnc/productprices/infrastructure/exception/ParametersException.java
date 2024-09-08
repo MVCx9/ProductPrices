@@ -1,4 +1,4 @@
-package com.bcnc.productprices.infrastructure.rest.exception;
+package com.bcnc.productprices.infrastructure.exception;
 
 
 public class ParametersException extends ApiException {

@@ -1,4 +1,4 @@
-package com.bcnc.productprices.domain.entity;
+package com.bcnc.productprices.domain.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -7,8 +7,8 @@ import java.util.List;
 
 @Entity
 @Data
-@Table(name = "BRANDS")
-public class Brands {
+@Table(name = "PRODUCTS")
+public class Products {
 
     @Id
     @Column(name = "ID", nullable = false)
@@ -17,7 +17,10 @@ public class Brands {
     @Column(name = "NAME", nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "brandId", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Column(name = "DESCRIPTION", nullable = false)
+    private String description;
+
+    @OneToMany(mappedBy = "productId", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProductPrice> prices;
 
 }

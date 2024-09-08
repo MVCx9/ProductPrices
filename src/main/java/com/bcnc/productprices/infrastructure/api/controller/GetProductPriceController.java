@@ -1,9 +1,9 @@
-package com.bcnc.productprices.infrastructure.rest.controller;
+package com.bcnc.productprices.infrastructure.api.controller;
 
-import com.bcnc.productprices.api.ProductPriceApi;
-import com.bcnc.productprices.domain.entity.ProductPrice;
-import com.bcnc.productprices.domain.service.ProductPriceService;
-import com.bcnc.productprices.infrastructure.rest.dto.ProductPriceDto;
+import com.bcnc.productprices.application.port.input.GetProductPrice;
+import com.bcnc.productprices.domain.model.ProductPrice;
+import com.bcnc.productprices.application.service.GetProductPriceService;
+import com.bcnc.productprices.infrastructure.api.dto.ProductPriceDto;
 import com.bcnc.productprices.utils.ParametersValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -17,18 +17,18 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
-public class ProductPriceController implements ProductPriceApi {
+public class GetProductPriceController implements GetProductPrice {
 
-    private final ProductPriceService productPriceService;
+    private final GetProductPriceService getProductPriceService;
 
     @Autowired
-    public ProductPriceController(ProductPriceService productPriceService) {
-        this.productPriceService = productPriceService;
+    public GetProductPriceController(GetProductPriceService getProductPriceService) {
+        this.getProductPriceService = getProductPriceService;
     }
 
     @Override
     public ResponseEntity<List<ProductPriceDto>> getAllPrices() {
-        List<ProductPrice> productPrice = productPriceService.getAllPrices();
+        List<ProductPrice> productPrice = getProductPriceService.getAllPrices();
         List<ProductPriceDto> productPriceDtos =
                 productPrice.stream()
                             .map(ProductPriceDto::new)
@@ -40,7 +40,7 @@ public class ProductPriceController implements ProductPriceApi {
     @Override
     public ResponseEntity<List<ProductPriceDto>> getPriceByBrandAndProduct(Long brandId, Long productId) {
         ParametersValidator.validateParameters(brandId, productId);
-        List<ProductPrice> productPrice = productPriceService.getPriceByBrandAndProduct(brandId, productId);
+        List<ProductPrice> productPrice = getProductPriceService.getPriceByBrandAndProduct(brandId, productId);
         List<ProductPriceDto> productPriceDtos =
                 productPrice.stream()
                         .map(ProductPriceDto::new)
@@ -56,7 +56,7 @@ public class ProductPriceController implements ProductPriceApi {
         @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime applicationDate
     ) {
         ParametersValidator.validateParameters(brandId, productId, applicationDate);
-        List<ProductPrice> productPrice = productPriceService.getPriceByDate(brandId, productId, applicationDate);
+        List<ProductPrice> productPrice = getProductPriceService.getPriceByDate(brandId, productId, applicationDate);
         List<ProductPriceDto> productPriceDtos =
                 productPrice.stream()
                         .map(ProductPriceDto::new)

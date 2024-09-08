@@ -1,8 +1,8 @@
-package com.bcnc.productprices.domain.service;
+package com.bcnc.productprices.application.service;
 
-import com.bcnc.productprices.domain.entity.ProductPrice;
-import com.bcnc.productprices.domain.repository.ProductPriceRepository;
-import com.bcnc.productprices.infrastructure.rest.exception.PriceNotFoundException;
+import com.bcnc.productprices.application.port.output.ProductPriceRepository;
+import com.bcnc.productprices.domain.model.ProductPrice;
+import com.bcnc.productprices.infrastructure.exception.PriceNotFoundException;
 import com.bcnc.productprices.utils.Constants;
 import org.springframework.stereotype.Service;
 
@@ -10,11 +10,11 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
-public class ProductPriceService {
+public class GetProductPriceService {
 
     private final ProductPriceRepository productPriceRepository;
 
-    public ProductPriceService(ProductPriceRepository productPriceRepository) {
+    public GetProductPriceService(ProductPriceRepository productPriceRepository) {
         this.productPriceRepository = productPriceRepository;
     }
 

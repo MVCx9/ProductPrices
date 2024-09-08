@@ -1,4 +1,4 @@
-package com.bcnc.productprices.infrastructure.rest.exception;
+package com.bcnc.productprices.infrastructure.exception;
 
 // General API Exception
 public class ApiException extends RuntimeException {

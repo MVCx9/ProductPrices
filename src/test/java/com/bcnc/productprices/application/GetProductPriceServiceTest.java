@@ -1,11 +1,11 @@
-package com.bcnc.productprices.service;
+package com.bcnc.productprices.application;
 
-import com.bcnc.productprices.domain.entity.Brands;
-import com.bcnc.productprices.domain.entity.ProductPrice;
-import com.bcnc.productprices.domain.entity.Products;
+import com.bcnc.productprices.application.service.GetProductPriceService;
+import com.bcnc.productprices.domain.model.Brands;
+import com.bcnc.productprices.domain.model.ProductPrice;
+import com.bcnc.productprices.domain.model.Products;
 import com.bcnc.productprices.domain.repository.ProductPriceRepository;
-import com.bcnc.productprices.domain.service.ProductPriceService;
-import com.bcnc.productprices.infrastructure.rest.exception.PriceNotFoundException;
+import com.bcnc.productprices.infrastructure.exception.PriceNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,18 +25,18 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
-class ProductPriceServiceTest {
+class GetProductPriceServiceTest {
 
     @MockBean
     private ProductPriceRepository productPriceRepository;
 
     @InjectMocks
-    private ProductPriceService productPriceService;
+    private GetProductPriceService getProductPriceService;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        productPriceService = new ProductPriceService(productPriceRepository);
+        getProductPriceService = new GetProductPriceService(productPriceRepository);
     }
 
     @Test
@@ -44,7 +44,7 @@ class ProductPriceServiceTest {
         List<ProductPrice> mockPrices = List.of(getDataExample(1L, 1L, LocalDateTime.now()));
         when(productPriceRepository.findAllPrices()).thenReturn(mockPrices);
 
-        List<ProductPrice> result = productPriceService.getAllPrices();
+        List<ProductPrice> result = getProductPriceService.getAllPrices();
 
         assertEquals(mockPrices, result);
     }
@@ -53,7 +53,7 @@ class ProductPriceServiceTest {
     void getAllPricesThrowsPriceNotFoundExceptionWhenNoPrices() {
         when(productPriceRepository.findAllPrices()).thenReturn(Collections.emptyList());
 
-        assertThrows(PriceNotFoundException.class, () -> productPriceService.getAllPrices());
+        assertThrows(PriceNotFoundException.class, () -> getProductPriceService.getAllPrices());
     }
 
     @Test
@@ -64,7 +64,7 @@ class ProductPriceServiceTest {
         List<ProductPrice> mockPrices = List.of(getDataExample(brandId, productId, LocalDateTime.now()));
         when(productPriceRepository.findByBrandAndProduct(brandId, productId)).thenReturn(mockPrices);
 
-        List<ProductPrice> result = productPriceService.getPriceByBrandAndProduct(brandId, productId);
+        List<ProductPrice> result = getProductPriceService.getPriceByBrandAndProduct(brandId, productId);
 
         assertEquals(mockPrices, result);
     }
@@ -73,7 +73,7 @@ class ProductPriceServiceTest {
     void getPriceByBrandAndProductThrowsPriceNotFoundExceptionWhenNoPrices() {
         when(productPriceRepository.findByBrandAndProduct(any(), any())).thenReturn(Collections.emptyList());
 
-        assertThrows(PriceNotFoundException.class, () -> productPriceService.getPriceByBrandAndProduct(1L, 1L));
+        assertThrows(PriceNotFoundException.class, () -> getProductPriceService.getPriceByBrandAndProduct(1L, 1L));
     }
 
     @Test
@@ -85,7 +85,7 @@ class ProductPriceServiceTest {
         List<ProductPrice> mockPrices = List.of(getDataExample(brandId, productId, applicationDate));
         when(productPriceRepository.findPriceByDate(brandId, productId, applicationDate)).thenReturn(mockPrices);
 
-        List<ProductPrice> result = productPriceService.getPriceByDate(brandId, productId, applicationDate);
+        List<ProductPrice> result = getProductPriceService.getPriceByDate(brandId, productId, applicationDate);
 
         assertEquals(mockPrices, result);
     }
@@ -95,7 +95,7 @@ class ProductPriceServiceTest {
         when(productPriceRepository.findPriceByDate(any(), any(), any())).thenReturn(Collections.emptyList());
 
         LocalDateTime localDate = LocalDateTime.now();
-        assertThrows(PriceNotFoundException.class, () -> productPriceService.getPriceByDate(1L, 1L, localDate));
+        assertThrows(PriceNotFoundException.class, () -> getProductPriceService.getPriceByDate(1L, 1L, localDate));
     }
 
     private static ProductPrice getDataExample(Long brandId, Long productId, LocalDateTime applicationDate) {

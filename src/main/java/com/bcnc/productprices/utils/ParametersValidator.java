@@ -1,7 +1,7 @@
 package com.bcnc.productprices.utils;
 
 
-import com.bcnc.productprices.infrastructure.rest.exception.ParametersException;
+import com.bcnc.productprices.infrastructure.exception.ParametersException;
 
 import java.time.LocalDateTime;
 
