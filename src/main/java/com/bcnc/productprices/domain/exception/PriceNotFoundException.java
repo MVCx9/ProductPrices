@@ -1,4 +1,4 @@
-package com.bcnc.productprices.infrastructure.exception;
+package com.bcnc.productprices.domain.exception;
 
 public class PriceNotFoundException extends ApiException {
     public PriceNotFoundException(String message) {

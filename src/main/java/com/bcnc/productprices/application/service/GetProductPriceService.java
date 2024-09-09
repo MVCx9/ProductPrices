@@ -3,7 +3,7 @@ package com.bcnc.productprices.application.service;
 import com.bcnc.productprices.domain.model.ProductPrice;
 import com.bcnc.productprices.domain.repository.ProductPriceRepository;
 import com.bcnc.productprices.domain.utils.Constants;
-import com.bcnc.productprices.infrastructure.exception.PriceNotFoundException;
+import com.bcnc.productprices.domain.exception.PriceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
