@@ -16,10 +16,10 @@ public interface JpaProductPriceRepository extends JpaRepository<ProductPrice, L
     List<ProductPrice> findAllPrices();
 
     @Override
-    @Query("SELECT p FROM ProductPrice p WHERE p.brandId.id = :brandId AND p.productId.id = :productId AND :applicationDate BETWEEN p.startDate AND p.endDate ORDER BY p.priority DESC")
+    @Query("SELECT p FROM ProductPrice p WHERE p.brandId.id = :brandId AND p.productId.id = :productId AND :applicationDate BETWEEN p.startDate AND p.endDate ORDER BY p.priority DESC LIMIT 1")
     List<ProductPrice> findPriceByDate(@Param("brandId") Long brandId, @Param("productId") Long productId, @Param("applicationDate") LocalDateTime applicationDate);
 
     @Override
-    @Query("SELECT p FROM ProductPrice p WHERE p.brandId.id = :brandId AND p.productId.id = :productId ORDER BY p.priority DESC")
+    @Query("SELECT p FROM ProductPrice p WHERE p.brandId.id = :brandId AND p.productId.id = :productId ORDER BY p.priority DESC LIMIT 1")
     List<ProductPrice> findByBrandAndProduct(@Param("brandId") Long brandId, @Param("productId") Long productId);
 }

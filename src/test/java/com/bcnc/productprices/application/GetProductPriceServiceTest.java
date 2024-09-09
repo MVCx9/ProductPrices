@@ -4,7 +4,7 @@ import com.bcnc.productprices.application.service.GetProductPriceService;
 import com.bcnc.productprices.domain.model.Brands;
 import com.bcnc.productprices.domain.model.ProductPrice;
 import com.bcnc.productprices.domain.model.Products;
-import com.bcnc.productprices.domain.repository.ProductPriceRepository;
+import com.bcnc.productprices.application.port.output.ProductPriceRepository;
 import com.bcnc.productprices.infrastructure.exception.PriceNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,8 +19,7 @@ import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -46,7 +45,12 @@ class GetProductPriceServiceTest {
 
         List<ProductPrice> result = getProductPriceService.getAllPrices();
 
-        assertEquals(mockPrices, result);
+        assertAll(() -> {
+            assertNotNull(result);
+            assertFalse(result.isEmpty());
+            result.forEach(productPrice -> assertNotNull(productPrice.getPrice()));
+            assertEquals(mockPrices, result);
+        });
     }
 
     @Test
@@ -66,7 +70,12 @@ class GetProductPriceServiceTest {
 
         List<ProductPrice> result = getProductPriceService.getPriceByBrandAndProduct(brandId, productId);
 
-        assertEquals(mockPrices, result);
+        assertAll(() -> {
+            assertNotNull(result);
+            assertFalse(result.isEmpty());
+            result.forEach(productPrice -> assertNotNull(productPrice.getPrice()));
+            assertEquals(mockPrices, result);
+        });
     }
 
     @Test
@@ -87,7 +96,12 @@ class GetProductPriceServiceTest {
 
         List<ProductPrice> result = getProductPriceService.getPriceByDate(brandId, productId, applicationDate);
 
-        assertEquals(mockPrices, result);
+        assertAll(() -> {
+            assertNotNull(result);
+            assertFalse(result.isEmpty());
+            result.forEach(productPrice -> assertNotNull(productPrice.getPrice()));
+            assertEquals(mockPrices, result);
+        });
     }
 
     @Test
