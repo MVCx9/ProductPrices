@@ -1,4 +1,4 @@
-package com.bcnc.productprices.domain.entity;
+package com.bcnc.productprices.domain.model;
 
 import lombok.Data;
 

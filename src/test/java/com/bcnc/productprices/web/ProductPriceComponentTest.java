@@ -58,7 +58,13 @@ class ProductPriceComponentTest {
         .then()
             .statusCode(HttpStatus.OK.value())
             .contentType(MediaType.APPLICATION_JSON_VALUE)
-            .body("size()", equalTo(4));
+            .body("size()", equalTo(4))
+            .body("[0].price", equalTo(25.45f))
+            .body("[1].price", equalTo(30.5f))
+            .body("[2].price", equalTo(38.95f))
+            .body("[3].price", equalTo(35.5f))
+            .body("[0].brandId", equalTo(1))
+            .body("[0].productId", equalTo(35455));
     }
 
     @Test
@@ -75,7 +81,8 @@ class ProductPriceComponentTest {
 
     @Test
     void getPriceByDateReturnsPrices_14_10() {
-        //Test 1: petición a las 10:00 del día 14 del producto 35455   para la brand 1 (ZARA)
+
+        //Test 1: petición a las 10:00 del día 14 del producto 35455 para la brand 1 (ZARA)
         RestAssured.given()
             .param("brandId", 1)
             .param("productId", 35455)
@@ -84,12 +91,19 @@ class ProductPriceComponentTest {
             .get("/api/prices_date")
         .then()
             .statusCode(HttpStatus.OK.value())
-            .contentType(MediaType.APPLICATION_JSON_VALUE);
+            .contentType(MediaType.APPLICATION_JSON_VALUE)
+            .body("size()", equalTo(1))
+            .body("[0].price", equalTo(35.50f))
+            .body("[0].priceList", equalTo(1))
+            .body("[0].priority", equalTo(0))
+            .body("[0].brandId", equalTo(1))
+            .body("[0].productId", equalTo(35455));
     }
 
     @Test
     void getPriceByDateReturnsPrices_14_16() {
-        //Test 2: petición a las 16:00 del día 14 del producto 35455   para la brand 1 (ZARA)
+
+        //Test 2: petición a las 16:00 del día 14 del producto 35455 para la brand 1 (ZARA)
         RestAssured.given()
             .param("brandId", 1)
             .param("productId", 35455)
@@ -98,13 +112,19 @@ class ProductPriceComponentTest {
             .get("/api/prices_date")
         .then()
             .statusCode(HttpStatus.OK.value())
-            .contentType(MediaType.APPLICATION_JSON_VALUE);
+            .contentType(MediaType.APPLICATION_JSON_VALUE)
+            .body("size()", equalTo(1))
+            .body("[0].price", equalTo(25.45f))
+            .body("[0].priority", equalTo(1))
+            .body("[0].priceList", equalTo(2))
+            .body("[0].brandId", equalTo(1))
+            .body("[0].productId", equalTo(35455));
     }
 
     @Test
     void getPriceByDateReturnsPrices_14_21() {
 
-        //Test 3: petición a las 21:00 del día 14 del producto 35455   para la brand 1 (ZARA)
+        //Test 3: petición a las 21:00 del día 14 del producto 35455 para la brand 1 (ZARA)
         RestAssured.given()
             .param("brandId", 1)
             .param("productId", 35455)
@@ -113,13 +133,18 @@ class ProductPriceComponentTest {
             .get("/api/prices_date")
         .then()
             .statusCode(HttpStatus.OK.value())
-            .contentType(MediaType.APPLICATION_JSON_VALUE);
+            .contentType(MediaType.APPLICATION_JSON_VALUE)
+            .body("size()", equalTo(1))
+            .body("[0].price", equalTo(35.50f))
+            .body("[0].priceList", equalTo(1))
+            .body("[0].brandId", equalTo(1))
+            .body("[0].productId", equalTo(35455));
     }
 
     @Test
     void getPriceByDateReturnsPrices_15_10() {
 
-        //Test 4: petición a las 10:00 del día 15 del producto 35455   para la brand 1 (ZARA)
+        //Test 4: petición a las 10:00 del día 15 del producto 35455 para la brand 1 (ZARA)
         RestAssured.given()
             .param("brandId", 1)
             .param("productId", 35455)
@@ -128,13 +153,19 @@ class ProductPriceComponentTest {
             .get("/api/prices_date")
         .then()
             .statusCode(HttpStatus.OK.value())
-            .contentType(MediaType.APPLICATION_JSON_VALUE);
+            .contentType(MediaType.APPLICATION_JSON_VALUE)
+            .body("size()", equalTo(1))
+            .body("[0].priceList", equalTo(3))
+            .body("[0].priority", equalTo(1))
+            .body("[0].price", equalTo(30.5f))
+            .body("[0].brandId", equalTo(1))
+            .body("[0].productId", equalTo(35455));
     }
 
     @Test
     void getPriceByDateReturnsPrices_16_21() {
 
-        //Test 5: petición a las 21:00 del día 16 del producto 35455   para la brand 1 (ZARA)
+        //Test 5: petición a las 21:00 del día 16 del producto 35455 para la brand 1 (ZARA)
         RestAssured.given()
             .param("brandId", 1)
             .param("productId", 35455)
@@ -143,7 +174,13 @@ class ProductPriceComponentTest {
             .get("/api/prices_date")
         .then()
             .statusCode(HttpStatus.OK.value())
-            .contentType(MediaType.APPLICATION_JSON_VALUE);
+            .contentType(MediaType.APPLICATION_JSON_VALUE)
+            .body("size()", equalTo(1))
+            .body("[0].priceList", equalTo(4))
+            .body("[0].priority", equalTo(1))
+            .body("[0].price", equalTo(38.95f))
+            .body("[0].brandId", equalTo(1))
+            .body("[0].productId", equalTo(35455));
     }
 
     @Test

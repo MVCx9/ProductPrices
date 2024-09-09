@@ -1,6 +1,6 @@
-package com.bcnc.productprices.infrastructure.rest.dto;
+package com.bcnc.productprices.infrastructure.input.api.dto;
 
-import com.bcnc.productprices.domain.entity.ProductPrice;
+import com.bcnc.productprices.domain.model.ProductPrice;
 import lombok.Data;
 
 import java.math.BigDecimal;

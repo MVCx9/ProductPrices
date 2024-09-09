@@ -11,6 +11,7 @@ ProductPrices is a Spring Boot application for managing product prices based on 
 - [Running Tests](#running-tests)
 - [Swagger UI Documentation](#swagger-ui-documentation)
 - [Technologies Used](#technologies-used)
+- [Architecture](#architecture)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -44,10 +45,22 @@ mvn spring-boot:run
 2. The application will start on http://localhost:8080.
 
 ## Running Tests
-To run all tests:
+### To run all tests:
 ```bash
 mvn test
 ```
+
+### Run Tests with JaCoCo: 
+Execute the following Maven command to run your tests and generate the JaCoCo report.  
+```bash
+mvn clean test
+```
+View JaCoCo Report: After running the tests, the JaCoCo report will be generated in the `target/site/jacoco` directory. 
+
+Open the `index.html` file in a web browser to view the detailed coverage report.
+
+open `target/site/jacoco/index.html` in a web browser.
+
 
 ## Swagger UI Documentation
 To use Swagger UI and explore API documentation, follow these steps:
@@ -62,7 +75,6 @@ To use Swagger UI and explore API documentation, follow these steps:
    Open your web browser and navigate to:
 
    http://localhost:8080/swagger-ui.html
-   
 
 3. **Explore API Documentation**:
     - You will see a list of all available endpoints, grouped by their controllers.
@@ -83,8 +95,54 @@ This allows you to interactively test your API endpoints directly from the Swagg
 - Java 21
 - Spring Boot
 - Maven
+- JPA
+- Lombok
 - H2 Database
 - Swagger UI
+- JUnit 5
+- Mockito
+- JaCoCo
+
+## Architecture
+This application follows the principles of Hexagonal Architecture.  
+
+### Benefits of Using Hexagonal Architecture
+
+1. **Separation of Concerns**:
+   - Divides the application into core business logic (domain) and external dependencies (adapters).
+   - Enhances maintainability and readability by isolating business logic from technical details.
+
+2. **Testability**:
+   - Core business logic can be tested independently of external systems.
+   - Simplifies unit testing by allowing mock implementations of external dependencies.
+
+3. **Flexibility and Adaptability**:
+   - Easily replace or modify external systems (e.g., databases, APIs) without affecting the core business logic.
+   - Supports multiple user interfaces or external systems interacting with the same core logic.
+
+4. **Scalability**:
+   - Facilitates scaling different parts of the application independently.
+   - Adapters can be scaled or optimized without changing the core business logic.
+
+5. **Dependency Inversion**:
+   - Core business logic does not depend on external systems, but rather on abstractions (ports).
+   - Promotes a more modular and loosely coupled design.
+
+6. **Maintainability**:
+   - Clear boundaries between different parts of the application make it easier to understand and modify.
+   - Reduces the risk of unintended side effects when making changes.
+
+7. **Reusability**:
+   - Core business logic can be reused across different projects or contexts.
+   - Adapters can be shared or reused with different core logic implementations.
+
+8. **Technology Agnostic**:
+   - Allows the core business logic to remain agnostic of specific technologies or frameworks.
+   - Facilitates migration to new technologies with minimal impact on the core logic.
+
+<h1 align="center">
+	<img src="assets/hexagonal_architecture.png" alt="HEADER">
+</h1>
 
 ## Contributing
 1. Fork the repository.

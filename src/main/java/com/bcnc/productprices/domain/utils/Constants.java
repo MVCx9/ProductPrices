@@ -1,9 +1,8 @@
-package com.bcnc.productprices.utils;
+package com.bcnc.productprices.domain.utils;
 
 public class Constants {
 
-    Constants() {
-    }
+    Constants() {}
 
     public static final String NOT_FOUND_MESSAGE = "Product prices not found";
     public static final String BRAND_PARAMETER_NOT_VALID = "El identificador de la marca (brandId) no es válido. Debe ser un número positivo.";
