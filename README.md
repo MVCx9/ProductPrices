@@ -44,10 +44,22 @@ mvn spring-boot:run
 2. The application will start on http://localhost:8080.
 
 ## Running Tests
-To run all tests:
+### To run all tests:
 ```bash
 mvn test
 ```
+
+### Run Tests with JaCoCo: 
+Execute the following Maven command to run your tests and generate the JaCoCo report.  
+```bash
+mvn clean test
+```
+View JaCoCo Report: After running the tests, the JaCoCo report will be generated in the ***target/site/jacoco*** directory. 
+
+Open the **index.html** file in a web browser to view the detailed coverage report.
+
+open ***target/site/jacoco/index.html*** in a web browser.
+
 
 ## Swagger UI Documentation
 To use Swagger UI and explore API documentation, follow these steps:
