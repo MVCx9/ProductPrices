@@ -7,6 +7,6 @@ import org.springframework.context.annotation.Configuration;
 @EntityScan(basePackages = "com.bcnc.productprices.domain.model;\n")
 public class EntitiesConfig {
 
-    EntitiesConfig() {
-    }
+    EntitiesConfig() {}
+
 }

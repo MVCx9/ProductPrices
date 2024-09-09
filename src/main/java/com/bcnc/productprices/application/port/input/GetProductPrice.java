@@ -1,6 +1,6 @@
 package com.bcnc.productprices.application.port.input;
 
-import com.bcnc.productprices.infrastructure.api.dto.ProductPriceDto;
+import com.bcnc.productprices.infrastructure.input.api.dto.ProductPriceDto;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +25,7 @@ public interface GetProductPrice {
     ResponseEntity<List<ProductPriceDto>> getAllPrices();
 
     /**
-     * Retrieves the price by brand and product.
+     * Retrieves all the price by brand and product.
      *
      * @param brandId the ID of the brand.
      * @param productId the ID of the product.
@@ -39,7 +39,7 @@ public interface GetProductPrice {
     );
 
     /**
-     * Retrieves the price by date.
+     * Retrieves the specific price of a brand-product depending on the date you consult it.
      *
      * @param brandId the ID of the brand.
      * @param productId the ID of the product.

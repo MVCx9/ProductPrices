@@ -1,4 +1,4 @@
-package com.bcnc.productprices.utils;
+package com.bcnc.productprices.domain.utils;
 
 
 import com.bcnc.productprices.infrastructure.exception.ParametersException;

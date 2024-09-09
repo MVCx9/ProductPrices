@@ -1,4 +1,4 @@
-package com.bcnc.productprices.infrastructure.api.dto;
+package com.bcnc.productprices.infrastructure.input.api.dto;
 
 import com.bcnc.productprices.domain.model.ProductPrice;
 import lombok.Data;

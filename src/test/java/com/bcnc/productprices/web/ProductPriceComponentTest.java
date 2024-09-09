@@ -58,10 +58,11 @@ class ProductPriceComponentTest {
         .then()
             .statusCode(HttpStatus.OK.value())
             .contentType(MediaType.APPLICATION_JSON_VALUE)
-            .body("size()", equalTo(1))
+            .body("size()", equalTo(4))
             .body("[0].price", equalTo(25.45f))
-            .body("[0].priceList", equalTo(2))
-            .body("[0].priority", equalTo(1))
+            .body("[1].price", equalTo(30.5f))
+            .body("[2].price", equalTo(38.95f))
+            .body("[3].price", equalTo(35.5f))
             .body("[0].brandId", equalTo(1))
             .body("[0].productId", equalTo(35455));
     }

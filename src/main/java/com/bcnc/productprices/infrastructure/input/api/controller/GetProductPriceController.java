@@ -1,10 +1,10 @@
-package com.bcnc.productprices.infrastructure.api.controller;
+package com.bcnc.productprices.infrastructure.input.api.controller;
 
 import com.bcnc.productprices.application.port.input.GetProductPrice;
 import com.bcnc.productprices.domain.model.ProductPrice;
 import com.bcnc.productprices.application.service.GetProductPriceService;
-import com.bcnc.productprices.infrastructure.api.dto.ProductPriceDto;
-import com.bcnc.productprices.utils.ParametersValidator;
+import com.bcnc.productprices.infrastructure.input.api.dto.ProductPriceDto;
+import com.bcnc.productprices.domain.utils.ParametersValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
