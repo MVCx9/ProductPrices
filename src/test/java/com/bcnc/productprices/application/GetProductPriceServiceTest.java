@@ -91,22 +91,21 @@ class GetProductPriceServiceTest {
         Long productId = 1L;
         LocalDateTime applicationDate = LocalDateTime.now();
 
-        List<ProductPrice> mockPrices = List.of(getDataExample(brandId, productId, applicationDate));
+        ProductPrice mockPrices = getDataExample(brandId, productId, applicationDate);
         when(productPriceRepository.findPriceByDate(brandId, productId, applicationDate)).thenReturn(mockPrices);
 
-        List<ProductPrice> result = getProductPriceService.getPriceByDate(brandId, productId, applicationDate);
+        ProductPrice result = getProductPriceService.getPriceByDate(brandId, productId, applicationDate);
 
         assertAll(() -> {
             assertNotNull(result);
-            assertFalse(result.isEmpty());
-            result.forEach(productPrice -> assertNotNull(productPrice.getPrice()));
+            assertNotNull(result.getPrice());
             assertEquals(mockPrices, result);
         });
     }
 
     @Test
     void getPriceByDateThrowsPriceNotFoundExceptionWhenNoPrices() {
-        when(productPriceRepository.findPriceByDate(any(), any(), any())).thenReturn(Collections.emptyList());
+        when(productPriceRepository.findPriceByDate(any(), any(), any())).thenReturn(null);
 
         LocalDateTime localDate = LocalDateTime.now();
         assertThrows(PriceNotFoundException.class, () -> getProductPriceService.getPriceByDate(1L, 1L, localDate));

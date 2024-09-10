@@ -39,11 +39,11 @@ public class GetProductPriceService {
         return prices;
     }
 
-    public List<ProductPrice> getPriceByDate(Long brandId, Long productId, LocalDateTime applicationDate) {
+    public ProductPrice getPriceByDate(Long brandId, Long productId, LocalDateTime applicationDate) {
 
-        List<ProductPrice> prices = productPriceRepository.findPriceByDate(brandId, productId, applicationDate);
+        ProductPrice prices = productPriceRepository.findPriceByDate(brandId, productId, applicationDate);
 
-        if (prices.isEmpty()) {
+        if (prices == null) {
             throw new PriceNotFoundException(Constants.NOT_FOUND_MESSAGE);
         }
 

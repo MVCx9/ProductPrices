@@ -50,19 +50,15 @@ public class GetProductPriceController implements GetProductPrice {
     }
 
     @Override
-    public ResponseEntity<List<ProductPriceDto>> getPriceByDate(
+    public ResponseEntity<ProductPriceDto> getPriceByDate(
         @RequestParam Long brandId,
         @RequestParam Long productId,
         @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime applicationDate
     ) {
         ParametersValidator.validateParameters(brandId, productId, applicationDate);
-        List<ProductPrice> productPrice = getProductPriceService.getPriceByDate(brandId, productId, applicationDate);
-        List<ProductPriceDto> productPriceDtos =
-                productPrice.stream()
-                        .map(ProductPriceDto::new)
-                        .toList();
+        ProductPriceDto productPriceDto = new ProductPriceDto(getProductPriceService.getPriceByDate(brandId, productId, applicationDate));
 
-        return ResponseEntity.ok(productPriceDtos);
+        return ResponseEntity.ok(productPriceDto);
     }
 
 

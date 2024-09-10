@@ -30,7 +30,7 @@ paths:
   /api/prices_brand-product:
     get:
       summary: Retrieves price by brand or product.
-      description: Retrieve the price based on the brand ID or product ID.
+      description: Retrieve the price list based on the brand ID or product ID.
       parameters:
         - name: brandId
           in: query

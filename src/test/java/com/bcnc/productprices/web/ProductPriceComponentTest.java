@@ -92,12 +92,11 @@ class ProductPriceComponentTest {
         .then()
             .statusCode(HttpStatus.OK.value())
             .contentType(MediaType.APPLICATION_JSON_VALUE)
-            .body("size()", equalTo(1))
-            .body("[0].price", equalTo(35.50f))
-            .body("[0].priceList", equalTo(1))
-            .body("[0].priority", equalTo(0))
-            .body("[0].brandId", equalTo(1))
-            .body("[0].productId", equalTo(35455));
+            .body("price", equalTo(35.50f))
+            .body("priceList", equalTo(1))
+            .body("priority", equalTo(0))
+            .body("brandId", equalTo(1))
+            .body("productId", equalTo(35455));
     }
 
     @Test
@@ -113,12 +112,11 @@ class ProductPriceComponentTest {
         .then()
             .statusCode(HttpStatus.OK.value())
             .contentType(MediaType.APPLICATION_JSON_VALUE)
-            .body("size()", equalTo(1))
-            .body("[0].price", equalTo(25.45f))
-            .body("[0].priority", equalTo(1))
-            .body("[0].priceList", equalTo(2))
-            .body("[0].brandId", equalTo(1))
-            .body("[0].productId", equalTo(35455));
+            .body("price", equalTo(25.45f))
+            .body("priority", equalTo(1))
+            .body("priceList", equalTo(2))
+            .body("brandId", equalTo(1))
+            .body("productId", equalTo(35455));
     }
 
     @Test
@@ -134,11 +132,10 @@ class ProductPriceComponentTest {
         .then()
             .statusCode(HttpStatus.OK.value())
             .contentType(MediaType.APPLICATION_JSON_VALUE)
-            .body("size()", equalTo(1))
-            .body("[0].price", equalTo(35.50f))
-            .body("[0].priceList", equalTo(1))
-            .body("[0].brandId", equalTo(1))
-            .body("[0].productId", equalTo(35455));
+            .body("price", equalTo(35.50f))
+            .body("priceList", equalTo(1))
+            .body("brandId", equalTo(1))
+            .body("productId", equalTo(35455));
     }
 
     @Test
@@ -154,12 +151,11 @@ class ProductPriceComponentTest {
         .then()
             .statusCode(HttpStatus.OK.value())
             .contentType(MediaType.APPLICATION_JSON_VALUE)
-            .body("size()", equalTo(1))
-            .body("[0].priceList", equalTo(3))
-            .body("[0].priority", equalTo(1))
-            .body("[0].price", equalTo(30.5f))
-            .body("[0].brandId", equalTo(1))
-            .body("[0].productId", equalTo(35455));
+            .body("priceList", equalTo(3))
+            .body("priority", equalTo(1))
+            .body("price", equalTo(30.5f))
+            .body("brandId", equalTo(1))
+            .body("productId", equalTo(35455));
     }
 
     @Test
@@ -175,12 +171,11 @@ class ProductPriceComponentTest {
         .then()
             .statusCode(HttpStatus.OK.value())
             .contentType(MediaType.APPLICATION_JSON_VALUE)
-            .body("size()", equalTo(1))
-            .body("[0].priceList", equalTo(4))
-            .body("[0].priority", equalTo(1))
-            .body("[0].price", equalTo(38.95f))
-            .body("[0].brandId", equalTo(1))
-            .body("[0].productId", equalTo(35455));
+            .body("priceList", equalTo(4))
+            .body("priority", equalTo(1))
+            .body("price", equalTo(38.95f))
+            .body("brandId", equalTo(1))
+            .body("productId", equalTo(35455));
     }
 
     @Test

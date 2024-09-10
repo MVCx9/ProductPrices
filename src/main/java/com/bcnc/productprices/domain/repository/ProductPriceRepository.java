@@ -9,5 +9,5 @@ public interface ProductPriceRepository {
 
     List<ProductPrice> findAllPrices();
     List<ProductPrice> findByBrandAndProduct(Long brandId, Long productId);
-    List<ProductPrice> findPriceByDate(Long brandId, Long productId, LocalDateTime applicationDate);
+    ProductPrice findPriceByDate(Long brandId, Long productId, LocalDateTime applicationDate);
 }

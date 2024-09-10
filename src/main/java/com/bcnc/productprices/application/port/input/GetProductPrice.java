@@ -48,7 +48,7 @@ public interface GetProductPrice {
      */
     @GetMapping("/prices_date")
     @ResponseStatus(value = HttpStatus.OK)
-    ResponseEntity<List<ProductPriceDto>> getPriceByDate(
+    ResponseEntity<ProductPriceDto> getPriceByDate(
             @RequestParam Long brandId,
             @RequestParam Long productId,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime applicationDate
