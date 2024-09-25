@@ -1,9 +1,10 @@
 package com.bcnc.productprices.application.service;
 
+import com.bcnc.productprices.domain.exception.PriceNotFoundException;
 import com.bcnc.productprices.domain.model.ProductPrice;
 import com.bcnc.productprices.domain.repository.ProductPriceRepository;
 import com.bcnc.productprices.domain.utils.Constants;
-import com.bcnc.productprices.domain.exception.PriceNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -14,6 +15,7 @@ public class GetProductPriceService {
 
     private final ProductPriceRepository productPriceRepository;
 
+    @Autowired
     public GetProductPriceService(ProductPriceRepository productPriceRepository) {
         this.productPriceRepository = productPriceRepository;
     }
